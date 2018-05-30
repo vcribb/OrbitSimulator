@@ -64,4 +64,9 @@ public class Body{
 	mass = newMass;
     }
 
+    //main function!
+    public void orbit(){
+	//write this later
+    }
+
 }
