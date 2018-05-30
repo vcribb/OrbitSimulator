@@ -1,0 +1,67 @@
+public class Body{
+
+    private int mass;
+    private double xvelocity;
+    private double yvelocity;
+    private double xacc;
+    private double yacc;
+    private double x;
+    private double y;
+
+    public Body(int m, double xpos, double ypos, double xvel, double yvel){
+	mass = m;
+	x = xpos;
+	y = ypos;
+	xvelocity = xvel;
+	yvelocity = yvel;
+    }
+
+    //a bunch of getters
+
+    public double getXVel(){
+	return xvelocity;
+    }
+    public double getYVel(){
+	return yvelocity;
+    }
+    public double getXAcc(){
+	return xacc;
+    }
+    public double getYAcc(){
+	return yacc;
+    }
+    public double getX(){
+	return x;
+    }
+    public double getY(){
+	return y;
+    }
+    public int getMass(){
+	return mass;
+    }
+
+    //a bunch of setters
+
+    public void setXVel(double newXVel){
+	xvelocity = newXVel;
+    }
+    public void setYVel(double newYVel){
+	yvelocity = newYVel;
+    }
+    public void setXAcc(double newXAcc){
+	xacc = newXAcc;
+    }
+    public void setYAcc(double newYAcc){
+	yacc = newYAcc;
+    }
+    public void setX(double newX){
+	x = newX;
+    }
+    public void setY(double newY){
+	y = newY;
+    }
+    public void setMass(int newMass){
+	mass = newMass;
+    }
+
+}
