@@ -67,6 +67,10 @@ public class Body{
     //main function!
     public void orbit(Body other){
 	//write this later
+	y += yvelocity;
+	x += xvelocity;
+	xvelocity += xacc;
+	yvelocity += yacc;
     }
 
 }
