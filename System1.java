@@ -1,11 +1,11 @@
 import java.util.*;
 import java.lang.*;
 
-public class System{
+public class System1{
 
     private ArrayList<Body> bodies;
 
-    public System(){
+    public System1(){
 	bodies = new ArrayList<Body>();
     }
 

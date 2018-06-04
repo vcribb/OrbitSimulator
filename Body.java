@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Body{
 
     private int mass;
@@ -71,6 +73,18 @@ public class Body{
 	x += xvelocity;
 	xvelocity += xacc;
 	yvelocity += yacc;
+    }
+
+    //helpers - make private later
+    public double dist(Body other){
+	return Math.sqrt(Math.pow(getX() - other.getX(), 2) +
+			 Math.pow(getY() - other.getY(), 2));
+    }
+
+    public static void main(String[] args){
+	Body b = new Body(10, 0, 0, 0, 0);
+	Body c = new Body(10, 3, 4, 0, 0);
+	System.out.println(b.dist(c));
     }
 
 }
