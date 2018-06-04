@@ -24,6 +24,11 @@ public class System{
     //main function!
     public void run(){
 	//write this later
+	for (int x = 0; x < bodies.size(); x++){
+	    for (int y = 0; y < bodies.size(); y++){
+		getBody(x).orbit(getBody(y));
+	    }
+	}
     }
     
 }
