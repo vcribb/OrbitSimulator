@@ -81,6 +81,8 @@ public class Body{
 			 Math.pow(getY() - other.getY(), 2));
     }
 
+    
+
     //testing functions
     public static void main(String[] args){
 	Body b = new Body(10, 0, 0, 0, 0);
