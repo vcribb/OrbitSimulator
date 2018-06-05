@@ -81,6 +81,16 @@ public class Body{
 			 Math.pow(getY() - other.getY(), 2));
     }
 
+    private double forceacc(Body other){
+	return (6.67 * Math.pow(10, -11)) * other.getMass() /
+	    (Math.pow(dist(other), 2));
+    }
+
+    private double theta(Body other){
+	return Math.atan(Math.abs(getX() - other.getX())/
+			 Math.abs(getY() - other.getY()));
+    }
+
     //testing functions
     public static void main(String[] args){
 	Body b = new Body(10, 0, 0, 0, 0);
