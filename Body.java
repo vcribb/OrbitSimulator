@@ -88,14 +88,14 @@ public class Body{
 
     private double theta(Body other){
 	return Math.atan(Math.abs(getX() - other.getX())/
-			 Math.abs(getY() - other.getY()));
+			 Math.abs(getY() - other.getY())) * 180/Math.PI;
     }
 
     //testing functions
     public static void main(String[] args){
 	Body b = new Body(10, 0, 0, 0, 0);
 	Body c = new Body(10, 3, 4, 0, 0);
-	//System.out.println(b.dist(c));
+	//System.out.println(b.theta(c));
     }
 
 }
