@@ -110,7 +110,7 @@ public class Body{
     public static void main(String[] args){
 	Body b = new Body(10, 0, 0, 0, 0);
 	Body c = new Body(10, 3, 4, 0, 0);
-	System.out.println(b.theta(c));
+	System.out.println(b.theta(c) * 180/Math.PI);
     }
     */
 
