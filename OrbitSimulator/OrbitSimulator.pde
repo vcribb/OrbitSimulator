@@ -3,7 +3,6 @@ import java.lang.*;
 
 System a;
 boolean center; 
-int cX, cY;
 
 void setup(){
   size(500, 500);
@@ -17,22 +16,23 @@ void draw(){
     text("Click to place central planet!", 100, 100);
   }
   if(center){
-    if(a.size() == 0){
+    if(a.size() == 1){
+      fill(255, 255, 255);
       text("Click to add orbiting bodies!", 100, 100);
     }
-    fill(204, 44, 0);
-    ellipse(cX, cY, 100, 100);
+    fill(204, 45, 0);
+    ellipse(a.getBody(0).getX(), a.getBody(0).getY(), 100, 100);
   }
-  for(int i = 0; i < a.size(); i++){
+  for(int i = 1; i < a.size(); i++){
     a.getBody(i).display();
   }
 }
 
 void mousePressed(){
    if(!center){
-    cX = mouseX;
-    cY = mouseY;
     center = true;
+    Body center = new Body(1000, mouseX, mouseY, 0, 0);
+    a.addBody(center);
   }
   else{
     // random values, set defaults later
