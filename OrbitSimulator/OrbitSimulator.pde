@@ -2,23 +2,21 @@ import java.util.*;
 import java.lang.*;
 
 System a;
-boolean center; 
 
 void setup(){
   size(500, 500);
   a = new System();
-  center = false;
 }
 
 void draw(){
   background(50);
-  if(!center){
-    text("Click to place central planet!", 100, 100);
+  if(a.size() == 0){
+    text("Click to place central planet!", 150, 100);
   }
-  if(center){
+  else{
     if(a.size() == 1){
       fill(255, 255, 255);
-      text("Click to add orbiting bodies!", 100, 100);
+      text("Click to add orbiting bodies!", 150, 100);
     }
     fill(204, 45, 0);
     ellipse(a.getBody(0).getX(), a.getBody(0).getY(), 100, 100);
@@ -29,8 +27,7 @@ void draw(){
 }
 
 void mousePressed(){
-   if(!center){
-    center = true;
+   if(a.size() == 0){
     Body center = new Body(1000, mouseX, mouseY, 0, 0);
     a.addBody(center);
   }
@@ -38,7 +35,7 @@ void mousePressed(){
     // random values, set defaults later
     Body bod = new Body(40, mouseX, mouseY, 10, 10);
     a.addBody(bod);
-    println(a.size());
+//    println(a.size());
   }
 }
 
@@ -153,7 +150,7 @@ public class Body{
   yvelocity += yacc;
     }
     
-    // just testing
+    // set sizes for now
   void display(){
     fill(0, 145, 104);
     ellipse(x, y, 20.0, 20.0);
