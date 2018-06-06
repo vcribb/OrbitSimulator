@@ -25,18 +25,15 @@ void draw(){
 }
 
 void mousePressed(){
-  println("mouse");
- // x = input(0);
- // y = input(0);
+  message = "Input an x velocity, then press ENTER";
+  
 }
 
-int input(int a){
-   while (!_x){
-     a = a * 10 + Character.getNumericValue(key);
-     println(a);
-     if(Character.getNumericValue(key) == -1){
-       _x = true;
-     }
-   }
-   return a;
-}
+/*
+// not sure where to put this, not under draw...
+// takes keyPressed, builds a number
+  if(keyPressed && Character.getNumericValue(key) != -1){
+    x = x * 10 + Character.getNumericValue(key);
+    println(x);
+  }
+*/
