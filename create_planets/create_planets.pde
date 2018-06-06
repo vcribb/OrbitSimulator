@@ -1,9 +1,16 @@
 SYSTEM s = new SYSTEM();
+float bx;
+float by;
+int boxSize = 75;
+boolean overBox = false;
+boolean locked = false;
+float xOffset = 0.0; 
+float yOffset = 0.0; 
 
 void setup() {
   size(600, 600);
   smooth();
-  background(0);
+  background(255);
   mousePressed();
 }
 
@@ -71,7 +78,7 @@ public class Body{
 
   //main function!
   public void orbit(Body other){
-    force(other);
+    forceAcc(other);
     move();
   }
 
