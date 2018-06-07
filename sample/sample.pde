@@ -4,28 +4,27 @@ void setup() {
   size(600, 600);
   smooth();
   background(0);
-  mouseClicked();
+  s.addBody(new Body(1000000000, 300, 300, 0, 0));
+  s.addBody(new Body(1000, 200, 300, 0, -10));
 }
 
 void draw() {
+  background(0);
+  text(frameRate, 20, 20);
   s.run();
-}
-
-void mouseClicked(){
-  s.addBody(new Body(1000000000, mouseX, mouseY, 0, 0));
 }
 
 import java.util.*;
 
 public class Body{
 
-  private int mass;
+  private float mass;
   private float xvelocity;
   private float yvelocity;
   private float x;
   private float y;
 
-  public Body(int m, float xpos, float ypos, float xvel, float yvel){
+  public Body(float m, float xpos, float ypos, float xvel, float yvel){
     mass = m;
     x = xpos;
     y = ypos;
@@ -47,7 +46,7 @@ public class Body{
   public float getY(){
     return y;
   }
-  public int getMass(){
+  public float getMass(){
     return mass;
   }
 
@@ -65,7 +64,7 @@ public class Body{
   public void setY(float newY){
     y = newY;
   }
-  public void setMass(int newMass){
+  public void setMass(float newMass){
     mass = newMass;
   }
 
@@ -84,7 +83,7 @@ public class Body{
   //finds the magnitude of acceleration due to the force exerted by a body
   private double forceAcc(Body other){
     //scale factor of 100 comes in here
-    return (6.67 * Math.pow(10, -26)) * other.getMass() /
+    return (6.67 * Math.pow(10, -24)) * other.getMass() /
       (Math.pow(dist(other), 2));
   }
 
@@ -97,20 +96,20 @@ public class Body{
   private void force(Body other){
     //accounting for time errors
     float counter = 0.0;
-    float simtime = 0.0001;
+    float simtime = 0.001;
     counter += (1 / frameRate);
     while (counter > 0.0){
       if (getX() > other.getX()){
-        xvelocity -= forceAcc(other) * Math.sin(theta(other)) * simtime;
+        xvelocity -= forceAcc(other) * Math.sin(theta(other));
       }
       else{
-        xvelocity += forceAcc(other) * Math.sin(theta(other)) * simtime;
+        xvelocity += forceAcc(other) * Math.sin(theta(other));
       }
       if (getY() > other.getY()){
-        yvelocity -= forceAcc(other) * Math.cos(theta(other)) * simtime;
+        yvelocity -= forceAcc(other) * Math.cos(theta(other));
       }
       else{
-        yvelocity += forceAcc(other) * Math.cos(theta(other)) * simtime;
+        yvelocity += forceAcc(other) * Math.cos(theta(other));
       }
       counter -= simtime;
     }
@@ -122,7 +121,7 @@ public class Body{
   }
   
   void display() {
-    ellipse(getX(), getY(), 20, 20);
+    ellipse(getX(), getY(), 50, 50);
   }
 
 }
