@@ -19,8 +19,7 @@ void setup(){
   cp5.addTextfield("y vel").setPosition(800, 170).setSize(140, 35).setAutoClear(false);
   cp5.addBang("Submit").setPosition(800, 280).setSize(80, 35);
   
-  s.addBody(new Body(20000, 350, 300, 0, 0.85));
-  //s.addBody(new Body(50000, 250, 300, 0, -0.85));
+  s.addBody(new Body(Math.pow(10, 27), 350, 300, 0, 0.85));
 }
 
 void draw(){
@@ -39,7 +38,7 @@ void draw(){
   }
   */
  //textSize(15);
-  text("Click to choose location, \nthen click SUBMIT!", 800, 240);
+  text("After entering ALL fields, \nclick to choose location, \nthen click SUBMIT!", 800, 240);
   s.show();
   s.run();
 }
