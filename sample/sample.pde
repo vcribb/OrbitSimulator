@@ -9,9 +9,15 @@ void setup() {
 }
 
 void draw() {
-  noStroke();
-  fill(0, 0, 0, 40);
-  rect(0, 0, width, height);
+  //noStroke();
+  //fill(0, 0, 0, 40);
+  //rect(0, 0, width, height);
+  background(0);
+  textSize(15);
+  text("x velocity of sun: " + s.getBody(0).getXVel() * 100, 20, 20);
+  text("y velocity of sun: " + s.getBody(0).getYVel() * 100, 20, 40);
+  text("x velocity of planet: " + s.getBody(1).getXVel() * 100, 20, 60);
+  text("x velocity of planet: " + s.getBody(1).getYVel() * 100, 20, 80);
   s.show();
   s.run();
 }
