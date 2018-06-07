@@ -17,11 +17,15 @@ void setup(){
   cp5.addTextfield("mass").setPosition(800, 30).setSize(140, 35).setAutoClear(false);
   cp5.addTextfield("x vel").setPosition(800, 100).setSize(140, 35).setAutoClear(false);
   cp5.addTextfield("y vel").setPosition(800, 170).setSize(140, 35).setAutoClear(false);
-  cp5.addBang("Submit").setPosition(800, 240).setSize(80, 35);
+  cp5.addBang("Submit").setPosition(800, 280).setSize(80, 35);
+  
+  s.addBody(new Body(20000, 350, 300, 0, 0.85));
+  //s.addBody(new Body(50000, 250, 300, 0, -0.85));
 }
 
 void draw(){
   background(0);
+  /*
   if(s.size() == 0){
     text("Click to place central planet!", 150, 100);
   }
@@ -33,9 +37,10 @@ void draw(){
     fill(204, 45, 0);
     ellipse(s.getBody(0).getX(), s.getBody(0).getY(), 100, 100);
   }
-  for(int i = 1; i < s.size(); i++){
-    s.getBody(i).display();
-  }
+  */
+ //textSize(15);
+  text("Click to choose location, \nthen click SUBMIT!", 800, 240);
+  s.show();
   s.run();
 }
 
@@ -43,34 +48,21 @@ void Submit() {
   m = cp5.get(Textfield.class,"mass").getText();
   _x = cp5.get(Textfield.class,"x vel").getText();
   _y = cp5.get(Textfield.class,"y vel").getText();
-  println("mass: " + m);
-  println("x vel: " + _x);
-  println("y vel: " + _y);
+  
   // then make new Body(m, someX, someY, _x, _y);
   // then clear m, _x, _y again
- // Body b = new Body(Integer.parseInt(m), xPos, yPos, Float.parseFloat(_x), Float.parseFloat(_y));
- // a.addBody(b);
+ Body b = new Body(Double.parseDouble(m), xPos, yPos, Float.parseFloat(_x), Float.parseFloat(_y));
+ s.addBody(b);
+ m = "";
+ _x = "";
+ _y = "";
 }
 
 void mousePressed(){
-   if(s.size() == 0){
-    Body center = new Body(1000, mouseX, mouseY, 0, 0);
-    s.addBody(center);
-  }
-  else{
-    // random values, set defaults later
-    // also to do later: det when to use defaults, when to wait for input
-    
-    
-    Body bod = new Body(40, mouseX, mouseY, 10, 10);
-    s.addBody(bod);
-    
-//    println(a.size());
-/*
+ 
   xPos = mouseX;
   yPos = mouseY;
-  */
-  }
+  
 }
 
 public class SYSTEM{
@@ -228,11 +220,4 @@ public class Body{
     ellipse(getX(), getY(), 50, 50);
   }
     
-    /*
-    // set sizes for now
-  void display(){
-    fill(0, 145, 104);
-    ellipse(x, y, 20.0, 20.0);
-  }
-  */
 }
