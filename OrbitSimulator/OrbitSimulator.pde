@@ -11,15 +11,15 @@ void setup(){
   size(1000, 600);
   smooth();
   background(0);
-  
   // input fields for mass, x vel, y vel, also a submit button
   cp5 = new ControlP5(this);
-  cp5.addTextfield("mass").setPosition(800, 30).setSize(140, 35).setAutoClear(false);
-  cp5.addTextfield("x vel").setPosition(800, 100).setSize(140, 35).setAutoClear(false);
-  cp5.addTextfield("y vel").setPosition(800, 170).setSize(140, 35).setAutoClear(false);
-  cp5.addBang("Submit").setPosition(800, 280).setSize(80, 35);
+  cp5.addTextfield("mass").setPosition(800, 30).setSize(140, 35);
+  cp5.addTextfield("x vel").setPosition(800, 100).setSize(140, 35);
+  cp5.addTextfield("y vel").setPosition(800, 170).setSize(140, 35);
+  cp5.addBang("Submit").setPosition(800, 300).setSize(80, 35);
   
-  s.addBody(new Body(Math.pow(10, 27), 350, 300, 0, 0.85));
+  // starting body, sun
+  s.addBody(new Body(Math.pow(10, 27), 350, 300, 0, 0));
 }
 
 void draw(){
@@ -37,8 +37,9 @@ void draw(){
     ellipse(s.getBody(0).getX(), s.getBody(0).getY(), 100, 100);
   }
   */
- //textSize(15);
-  text("After entering ALL fields, \nclick to choose location, \nthen click SUBMIT!", 800, 240);
+  textSize(15);
+  text("After entering ALL fields, \nclick to choose location, \nthen click SUBMIT!", 800, 240);  
+  
   s.show();
   s.run();
 }
@@ -48,7 +49,12 @@ void Submit() {
   _x = cp5.get(Textfield.class,"x vel").getText();
   _y = cp5.get(Textfield.class,"y vel").getText();
   
-  // then make new Body(m, someX, someY, _x, _y);
+  // clear after submitting
+  cp5.get(Textfield.class,"mass").clear();
+  cp5.get(Textfield.class,"x vel").clear();
+  cp5.get(Textfield.class,"y vel").clear();
+  
+  // add new Body(m, someX, someY, _x, _y);
   // then clear m, _x, _y again
  Body b = new Body(Double.parseDouble(m), xPos, yPos, Float.parseFloat(_x), Float.parseFloat(_y));
  s.addBody(b);
@@ -58,7 +64,7 @@ void Submit() {
 }
 
 void mousePressed(){
- 
+  
   xPos = mouseX;
   yPos = mouseY;
   
