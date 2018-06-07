@@ -1,11 +1,20 @@
 import java.util.*;
 import java.lang.*;
+import controlP5.*;
 
+ControlP5 cp5;
 System a;
 
 void setup(){
-  size(500, 500);
+  size(1000, 600);
   a = new System();
+  
+  // input fields
+  cp5 = new ControlP5(this);
+  cp5.addTextfield("mass").setPosition(800, 30).setSize(140, 40).setAutoClear(false);
+  cp5.addTextfield("x vel").setPosition(800, 100).setSize(140, 40).setAutoClear(false);
+  cp5.addTextfield("y vel").setPosition(800, 170).setSize(140, 40).setAutoClear(false);
+  cp5.addBang("Submit").setPosition(800, 240).setSize(80, 40);
 }
 
 void draw(){
