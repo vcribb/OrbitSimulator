@@ -4,6 +4,7 @@ import controlP5.*;
 
 ControlP5 cp5;
 System a;
+String m, _x, _y;
 
 void setup(){
   size(1000, 600);
@@ -33,6 +34,17 @@ void draw(){
   for(int i = 1; i < a.size(); i++){
     a.getBody(i).display();
   }
+}
+
+void Submit() {
+  m = cp5.get(Textfield.class,"mass").getText();
+  _x = cp5.get(Textfield.class,"x vel").getText();
+  _y = cp5.get(Textfield.class,"y vel").getText();
+  println("mass: " + m);
+  println("x vel: " + _x);
+  println("y vel: " + _y);
+  // then make new Body(m, someX, someY, _x, _y);
+  // then clear m, _x, _y again
 }
 
 void mousePressed(){
