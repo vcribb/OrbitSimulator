@@ -4,16 +4,16 @@ void setup() {
   size(600, 600);
   smooth();
   background(0);
+  //adds a sun at the center of the world
   s.addBody(new Body(Math.pow(10, 27), 300, 300, 0, 0));
+  //adds an orbiting planet of smaller mass
   s.addBody(new Body(Math.pow(10, 21), 175, 300, 0, -1));
 }
 
 void draw() {
-  //noStroke();
-  //fill(0, 0, 0, 40);
-  //rect(0, 0, width, height);
   background(0);
   textSize(15);
+  //monitors for the velocity of each body in the SYSTEM
   text("x velocity of sun: " + s.getBody(0).getXVel() * 100, 20, 20);
   text("y velocity of sun: " + s.getBody(0).getYVel() * 100, 20, 40);
   text("x velocity of planet: " + s.getBody(1).getXVel() * 100, 20, 60);
@@ -103,6 +103,7 @@ public class Body{
 
   private void force(Body other){
     //accounting for time errors
+    //calculates the values of the gravitational force many times per frame and adds them
     float counter = 0.0;
     float simtime = 0.001;
     counter += (1 / frameRate);
@@ -123,11 +124,13 @@ public class Body{
     }
   }
 
+  //applies the effects of the gravitational force
   void move(){
     setX(getX() + xvelocity);
     setY(getY() + yvelocity);
   }
   
+  //draws the individual bodies
   void display() {
     stroke(204, 102, 0);
     fill(204, 102, 0);
@@ -168,6 +171,7 @@ public class SYSTEM{
     }
   }
   
+  //calls the display function on each body in the SYSTEM to "draw" it
   void show(){
     for (int x = 0; x < bodies.size(); x++){
       getBody(x).display();
