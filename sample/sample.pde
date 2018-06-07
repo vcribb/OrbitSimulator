@@ -5,7 +5,7 @@ void setup() {
   smooth();
   background(0);
   s.addBody(new Body(1000000000, 300, 300, 0, 0));
-  s.addBody(new Body(10, 200, 300, 0, -10));
+  s.addBody(new Body(10, 200, 300, 0, -1));
 }
 
 void draw() {
@@ -71,7 +71,7 @@ public class Body{
 
   //main function!
   public void orbit(Body other){
-    forceAcc(other);
+    force(other);
     move();
   }
 
@@ -117,8 +117,8 @@ public class Body{
   }
 
   void move(){
-    setX(getX() + xvelocity * (1/frameRate));
-    setY(getY() + yvelocity * (1/frameRate));
+    setX(getX() + xvelocity);
+    setY(getY() + yvelocity);
   }
   
   void display() {
@@ -148,12 +148,13 @@ public class SYSTEM{
     bodies.add(thing);
   }
 
-  //main function! this calls the orbit function on each pair of bodies
-  //in the SYSTEM.
+  //main function! this calls the orbit function on each pair of bodies in the SYSTEM.
   public void run(){
     for (int x = 0; x < bodies.size(); x++){
       for (int y = 0; y < bodies.size(); y++){
-        getBody(x).orbit(getBody(y));
+        if (x != y){
+          getBody(x).orbit(getBody(y));
+        }
       }
     }
   }
