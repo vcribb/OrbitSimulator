@@ -4,8 +4,8 @@ void setup() {
   size(600, 600);
   smooth();
   background(0);
-  s.addBody(new Body(1000000000, 300, 300, 0, 0));
-  s.addBody(new Body(10, 200, 300, 0, -1));
+  s.addBody(new Body(Math.pow(10, 27), 300, 300, 0, 0));
+  s.addBody(new Body(Math.pow(10, 21), 200, 300, 0, -1));
 }
 
 void draw() {
@@ -19,13 +19,13 @@ import java.util.*;
 
 public class Body{
 
-  private float mass;
+  private double mass;
   private float xvelocity;
   private float yvelocity;
   private float x;
   private float y;
 
-  public Body(float m, float xpos, float ypos, float xvel, float yvel){
+  public Body(double m, float xpos, float ypos, float xvel, float yvel){
     mass = m;
     x = xpos;
     y = ypos;
@@ -47,7 +47,7 @@ public class Body{
   public float getY(){
     return y;
   }
-  public float getMass(){
+  public double getMass(){
     return mass;
   }
 
@@ -65,7 +65,7 @@ public class Body{
   public void setY(float newY){
     y = newY;
   }
-  public void setMass(float newMass){
+  public void setMass(double newMass){
     mass = newMass;
   }
 
