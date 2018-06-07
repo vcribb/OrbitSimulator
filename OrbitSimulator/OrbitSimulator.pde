@@ -5,6 +5,7 @@ import controlP5.*;
 ControlP5 cp5;
 System a;
 String m, _x, _y;
+float xPos, yPos;
 
 void setup(){
   size(1000, 600);
@@ -12,10 +13,10 @@ void setup(){
   
   // input fields
   cp5 = new ControlP5(this);
-  cp5.addTextfield("mass").setPosition(800, 30).setSize(140, 40).setAutoClear(false);
-  cp5.addTextfield("x vel").setPosition(800, 100).setSize(140, 40).setAutoClear(false);
-  cp5.addTextfield("y vel").setPosition(800, 170).setSize(140, 40).setAutoClear(false);
-  cp5.addBang("Submit").setPosition(800, 240).setSize(80, 40);
+  cp5.addTextfield("mass").setPosition(800, 30).setSize(140, 35).setAutoClear(false);
+  cp5.addTextfield("x vel").setPosition(800, 100).setSize(140, 35).setAutoClear(false);
+  cp5.addTextfield("y vel").setPosition(800, 170).setSize(140, 35).setAutoClear(false);
+  cp5.addBang("Submit").setPosition(800, 240).setSize(80, 35);
 }
 
 void draw(){
@@ -45,6 +46,8 @@ void Submit() {
   println("y vel: " + _y);
   // then make new Body(m, someX, someY, _x, _y);
   // then clear m, _x, _y again
+ // Body b = new Body(Integer.parseInt(m), xPos, yPos, Float.parseFloat(_x), Float.parseFloat(_y));
+ // a.addBody(b);
 }
 
 void mousePressed(){
@@ -54,9 +57,17 @@ void mousePressed(){
   }
   else{
     // random values, set defaults later
+    // also to do later: det when to use defaults, when to wait for input
+    
+    
     Body bod = new Body(40, mouseX, mouseY, 10, 10);
     a.addBody(bod);
+    
 //    println(a.size());
+/*
+  xPos = mouseX;
+  yPos = mouseY;
+  */
   }
 }
 
@@ -99,14 +110,14 @@ public class System{
 public class Body{
 
     private int mass;
-    private double xvelocity;
-    private double yvelocity;
+    private float xvelocity;
+    private float yvelocity;
     private double xacc;
     private double yacc;
     private float x;
     private float y;
 
-    public Body(int m, float xpos, float ypos, double xvel, double yvel){
+    public Body(int m, float xpos, float ypos, float xvel, float yvel){
   mass = m;
   x = xpos;
   y = ypos;
@@ -116,10 +127,10 @@ public class Body{
 
     //a bunch of getters
 
-    public double getXVel(){
+    public float getXVel(){
   return xvelocity;
     }
-    public double getYVel(){
+    public float getYVel(){
   return yvelocity;
     }
     public double getXAcc(){
@@ -140,10 +151,10 @@ public class Body{
 
     //a bunch of setters
 
-    public void setXVel(double newXVel){
+    public void setXVel(float newXVel){
   xvelocity = newXVel;
     }
-    public void setYVel(double newYVel){
+    public void setYVel(float newYVel){
   yvelocity = newYVel;
     }
     public void setXAcc(double newXAcc){
