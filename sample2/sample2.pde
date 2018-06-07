@@ -4,8 +4,8 @@ void setup() {
   size(600, 600);
   smooth();
   background(0);
-  s.addBody(new Body(Math.pow(10, 27), 300, 300, 0, 0));
-  s.addBody(new Body(Math.pow(10, 21), 175, 300, 0, -1));
+  s.addBody(new Body(Math.pow(10, 27), 350, 300, 0, 0.75));
+  s.addBody(new Body(Math.pow(10, 27), 250, 300, 0, -0.75));
 }
 
 void draw() {
