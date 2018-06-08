@@ -3,15 +3,22 @@ float y = 530;
 float w = 150;
 float h = 40;
 SYSTEM s = new SYSTEM();
+PImage bg;
 
 void setup(){
  size(600, 600);
  background(0);
  stroke(0);
+ if ((int) (Math.random() * 2 + 1) % 2 == 0){
+   bg = loadImage("nebula2.jpg");
+ }
+ else{
+   bg = loadImage("nebula.jpg");
+ }
 }
 
 void draw() {
-  background(0);
+  background(bg);
   fill(255);
   rect(x, y, w, h);
   rect(x + 200, y, w, h);
@@ -32,8 +39,8 @@ void draw() {
     if(mouseX > x + 200 && mouseX < x + w + 200 && mouseY > y && mouseY < y + h){
       s.clear(); 
       //creates two stars of equal mass
-      s.addBody(new Body(Math.pow(10, 27), 350, 300, 0, 0.75));
-      s.addBody(new Body(Math.pow(10, 27), 250, 300, 0, -0.75));
+      s.addBody(new Body(Math.pow(10, 27), 350, 300, 0, 0.8));
+      s.addBody(new Body(Math.pow(10, 27), 250, 300, 0, -0.8));
     }
     if(mouseX > x + 400 && mouseX < x + w + 400 && mouseY > y && mouseY < y + h){
       s.clear();
@@ -178,7 +185,7 @@ public class Body{
   
   //draws the individual bodies
   void display() {
-    stroke(204, 102, 0);
+    stroke(0);
     fill(204, 102, 0);
     ellipse(getX(), getY(), 40, 40);
   }
