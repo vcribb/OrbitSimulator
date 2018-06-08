@@ -18,28 +18,16 @@ void setup(){
   cp5.addTextfield("y vel").setPosition(800, 170).setSize(140, 35);
   cp5.addBang("Submit").setPosition(800, 300).setSize(80, 35);
   
+  cp5.addBang("Clear").setPosition(800, 500).setSize(35, 35);
+  
   // starting body, sun
   s.addBody(new Body(Math.pow(10, 27), 350, 300, 0, 0));
 }
 
 void draw(){
   background(0);
-  /*
-  if(s.size() == 0){
-    text("Click to place central planet!", 150, 100);
-  }
-  else{
-    if(s.size() == 1){
-      fill(255, 255, 255);
-      text("Click to add orbiting bodies!", 150, 100);
-    }
-    fill(204, 45, 0);
-    ellipse(s.getBody(0).getX(), s.getBody(0).getY(), 100, 100);
-  }
-  */
   textSize(15);
-  text("After entering ALL fields, \nclick to choose location, \nthen click SUBMIT!", 800, 240);  
-  
+  text("After entering ALL fields, \nclick to choose location, \nthen click SUBMIT!", 800, 240);
   s.show();
   s.run();
 }
@@ -63,6 +51,10 @@ void Submit() {
  _y = "";
 }
 
+void Clear(){
+  s.clear();
+}
+
 void mousePressed(){
   
   xPos = mouseX;
@@ -82,6 +74,10 @@ public class SYSTEM{
     return bodies.size();
   }
   
+  public void clear(){
+   bodies.clear(); 
+  }
+  
   //basic getter
   public Body getBody(int index){
     return bodies.get(index);
@@ -91,7 +87,7 @@ public class SYSTEM{
   public void addBody(Body thing){
     bodies.add(thing);
   }
-
+  
   //main function! this calls the orbit function on each pair of bodies in the SYSTEM.
   public void run(){
     for (int x = 0; x < bodies.size(); x++){
