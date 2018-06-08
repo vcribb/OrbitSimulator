@@ -18,15 +18,21 @@ void setup(){
   cp5.addTextfield("y vel").setPosition(800, 170).setSize(140, 35);
   cp5.addBang("Submit").setPosition(800, 300).setSize(80, 35);
   
+  // perhaps a clear button?
   cp5.addBang("Clear").setPosition(800, 500).setSize(35, 35);
   
   // starting body, sun
-  s.addBody(new Body(Math.pow(10, 27), 350, 300, 0, 0));
+ s.addBody(new Body(Math.pow(10, 27), 350, 300, 0, 0));
+ 
+ //creates two stars of equal mass
+ //s.addBody(new Body(Math.pow(10, 27), 350, 300, 0, 0.85));
+// s.addBody(new Body(Math.pow(10, 27), 250, 300, 0, -0.85));
 }
 
 void draw(){
   background(0);
   textSize(15);
+  fill(255, 255, 255);
   text("After entering ALL fields, \nclick to choose location, \nthen click SUBMIT!", 800, 240);
   s.show();
   s.run();
@@ -55,11 +61,9 @@ void Clear(){
   s.clear();
 }
 
-void mousePressed(){
-  
+void mousePressed(){  
   xPos = mouseX;
-  yPos = mouseY;
-  
+  yPos = mouseY; 
 }
 
 public class SYSTEM{
@@ -115,6 +119,7 @@ public class Body{
     private float yvelocity;
     private float x;
     private float y;
+    float r, g, b;
 
     public Body(double m, float xpos, float ypos, float xvel, float yvel){
   mass = m;
@@ -122,6 +127,9 @@ public class Body{
   y = ypos;
   xvelocity = xvel;
   yvelocity = yvel;
+  r = random(255);
+  b = random(255);
+  g = random(255);
     }
 
     //a bunch of getters
@@ -217,7 +225,7 @@ public class Body{
   //draws the individual bodies
   void display() {
     stroke(204, 102, 0);
-    fill(204, 102, 0);
+    fill(r, g, b);
     ellipse(getX(), getY(), 50, 50);
   }
     
