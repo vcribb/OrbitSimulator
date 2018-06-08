@@ -1,24 +1,71 @@
+float x = 25;
+float y = 530;
+float w = 150;
+float h = 40;
 SYSTEM s = new SYSTEM();
 
-void setup() {
-  size(600, 600);
-  smooth();
-  background(0);
-  //creates two stars of equal mass
-  s.addBody(new Body(Math.pow(10, 27), 350, 300, 0, 0.75));
-  s.addBody(new Body(Math.pow(10, 27), 250, 300, 0, -0.75));
+void setup(){
+ size(600, 600);
+ background(0);
+ stroke(0);
 }
 
 void draw() {
   background(0);
+  fill(255);
+  rect(x, y, w, h);
+  rect(x + 200, y, w, h);
+  fill(126, 188, 124);
+  rect(x + 400, y, w, h);
+  fill(0);
+  text("PLANET AND SUN", x + 10, y + 30);
+  text("BINARY SYSTEM", x + 220, y + 30);
+  text("DRAW YOUR OWN", x + 410, y + 30);
+  if (mousePressed){
+    if(mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h){
+      s.clear();
+      //adds a sun at the center of the world
+      s.addBody(new Body(Math.pow(10, 27), 300, 300, 0, 0));
+      //adds an orbiting planet of smaller mass
+      s.addBody(new Body(Math.pow(10, 21), 175, 300, 0, -1));
+    }
+    if(mouseX > x + 200 && mouseX < x + w + 200 && mouseY > y && mouseY < y + h){
+      s.clear(); 
+      //creates two stars of equal mass
+      s.addBody(new Body(Math.pow(10, 27), 350, 300, 0, 0.75));
+      s.addBody(new Body(Math.pow(10, 27), 250, 300, 0, -0.75));
+    }
+    if(mouseX > x + 400 && mouseX < x + w + 400 && mouseY > y && mouseY < y + h){
+      s.clear();
+    }
+  }
   textSize(15);
-  //monitors for the velocity of each star in the SYSTEM
-  text("x velocity of star#1: " + s.getBody(0).getXVel() * 100, 20, 20);
-  text("y velocity of star#1: " + s.getBody(0).getYVel() * 100, 20, 40);
-  text("x velocity of star#2: " + s.getBody(1).getXVel() * 100, 20, 60);
-  text("x velocity of star#2: " + s.getBody(1).getYVel() * 100, 20, 80);
+  //monitors for the velocity of each body in the SYSTEM
+  if (s.size() > 0){
+    fill(255);
+    text("x velocity of body 1: " + s.getBody(0).getXVel() * 100, 20, 20);
+    text("y velocity of body 1: " + s.getBody(0).getYVel() * 100, 20, 40);
+    text("x velocity of body 2: " + s.getBody(1).getXVel() * 100, 20, 60);
+    text("x velocity of body 2: " + s.getBody(1).getYVel() * 100, 20, 80);
+  }
   s.show();
   s.run();
+}
+
+void mousePressed(){
+  if(mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h){
+    s.clear();
+    //adds a sun at the center of the world
+    s.addBody(new Body(Math.pow(10, 27), 300, 300, 0, 0));
+    //adds an orbiting planet of smaller mass
+    s.addBody(new Body(Math.pow(10, 21), 175, 300, 0, -1));
+  }
+  if(mouseX > x + 250 && mouseX < x + w + 250 && mouseY > y && mouseY < y + h){
+    s.clear(); 
+    //creates two stars of equal mass
+    s.addBody(new Body(Math.pow(10, 27), 350, 300, 0, 0.75));
+    s.addBody(new Body(Math.pow(10, 27), 250, 300, 0, -0.75));
+  }
 }
 
 import java.util.*;
@@ -133,7 +180,7 @@ public class Body{
   void display() {
     stroke(204, 102, 0);
     fill(204, 102, 0);
-    ellipse(getX(), getY(), 50, 50);
+    ellipse(getX(), getY(), 40, 40);
   }
 
 }
@@ -151,6 +198,7 @@ public class SYSTEM{
 
   //basic getter
   public Body getBody(int index){
+    if (bodies.size() == 0){return null;}
     return bodies.get(index);
   }
 
@@ -175,6 +223,14 @@ public class SYSTEM{
     for (int x = 0; x < bodies.size(); x++){
       getBody(x).display();
     }
+  }
+  
+  void clear(){
+    bodies = new ArrayList<Body>();
+  }
+  
+  int size(){
+    return bodies.size();
   }
     
 }
