@@ -4,20 +4,19 @@ void setup() {
   size(600, 600);
   smooth();
   background(0);
-  //adds a sun at the center of the world
-  s.addBody(new Body(Math.pow(10, 27), 300, 300, 0, 0));
-  //adds an orbiting planet of smaller mass
-  s.addBody(new Body(Math.pow(10, 21), 175, 300, 0, -1));
+  //creates two stars of equal mass
+  s.addBody(new Body(Math.pow(10, 27), 350, 300, 0, 0.75));
+  s.addBody(new Body(Math.pow(10, 27), 250, 300, 0, -0.75));
 }
 
 void draw() {
   background(0);
   textSize(15);
-  //monitors for the velocity of each body in the SYSTEM
-  text("x velocity of sun: " + s.getBody(0).getXVel() * 100, 20, 20);
-  text("y velocity of sun: " + s.getBody(0).getYVel() * 100, 20, 40);
-  text("x velocity of planet: " + s.getBody(1).getXVel() * 100, 20, 60);
-  text("x velocity of planet: " + s.getBody(1).getYVel() * 100, 20, 80);
+  //monitors for the velocity of each star in the SYSTEM
+  text("x velocity of star#1: " + s.getBody(0).getXVel() * 100, 20, 20);
+  text("y velocity of star#1: " + s.getBody(0).getYVel() * 100, 20, 40);
+  text("x velocity of star#2: " + s.getBody(1).getXVel() * 100, 20, 60);
+  text("x velocity of star#2: " + s.getBody(1).getYVel() * 100, 20, 80);
   s.show();
   s.run();
 }
