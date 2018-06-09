@@ -1,6 +1,6 @@
 # OrbitSimulator
 
-<b>What is an orbit simulator?</b>
+<b>What is an orbit simulator and what does this one do?</b>
 
 An orbit simulator is a program that takes a system of bodies and simulates the effects of gravity on each of them due to all of the other bodies in the system. The setup is fairly simple: the user can use their mouse to place multiple bodies on the screen with masses and initial velocities that they are also able to determine through keyboard input. The user can then run the simulation to observe the gravitational forces each of the bodies exert on each other and their subsequent motion.
 
