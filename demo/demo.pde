@@ -122,6 +122,9 @@ void draw() {
       }
       if(mouseX > x + 200 && mouseX < x + w + 200 && mouseY > y && mouseY < y + h){
         e = true;
+        b = false;
+        c = false;
+        d = false;
       }
       if(mouseX > x + 400 && mouseX < x + w + 400 && mouseY > y && mouseY < y + h){
         s.clear();
@@ -159,6 +162,8 @@ void draw() {
       }
       if(mouseX > x + 200 && mouseX < x + w + 200 && mouseY > y && mouseY < y + h){
         e = true;
+        b = false;
+        c = false;
       }
       if(mouseX > x + 400 && mouseX < x + w + 400 && mouseY > y && mouseY < y + h){
         s.clear();
@@ -181,7 +186,7 @@ void draw() {
     }
     s.show();
   }
-  if(e){
+  if(d && e){
     s.run();
   }
 }
