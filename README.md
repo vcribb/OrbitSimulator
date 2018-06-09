@@ -28,8 +28,8 @@ Our orbit simulator has several important features, namely:
 
 <b>Instructions</b>
 
-To run this simulation, change the directory to OrbitSimulator and enter:
+To run this simulation, the user must change the directory to OrbitSimulator and enter:
 
 <i>processing OrbitSimulator.pde</i>
 
-into your terminal. Then follow the directions in the start menu.
+into their terminal. They should then follow the directions in the start menu.
