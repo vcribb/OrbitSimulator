@@ -20,7 +20,7 @@ Our orbit simulator has several important features, namely:
   <li>User-created scenarios</li>
   <ul>
     <li>
-      Alternatively, the user can create their own system by placing bodies on the screen with their mouse. They are also  able to determine the mass and initial velocity of each of the bodies in the system through keyboard input. The user can then run the simulation on their generated system.
+      Alternatively, the user can create their own system by placing bodies on the screen with their mouse (and clearing the screen if necessary). They are also able to determine the mass and initial velocity of each of the bodies in the system through keyboard input. The user can then run the simulation on their generated system.
     </li>
   </ul>
   <li>trace?</li>
