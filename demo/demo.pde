@@ -34,7 +34,7 @@ void draw() {
   text("PRE-SET SYSTEMS", 235, 328);
   text("DRAW YOUR OWN", 235, 428);
   }
-  if (mousePressed){
+  if (mousePressed && !keyPressed){
     if (mouseX > 225 && mouseX < 225 + w && mouseY > 300 && mouseY < 300 + h){
       b = true;
       c = false;
@@ -56,7 +56,7 @@ void draw() {
     text("PLANET AND SUN", x + 10, y + 30);
     text("BINARY SYSTEM", x + 220, y + 30);
     text("BACK TO MENU", x + 420, y + 30);  
-    if (mousePressed){
+    if (mousePressed && !keyPressed && !c && !d){
       if(mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h){
         s.clear();
         //adds a sun at the center of the world
@@ -101,7 +101,7 @@ void draw() {
     text("DRAW BODIES", x + 25, y + 30);
     text("RUN THE SYSTEM!", x + 210, y + 30);
     text("BACK TO MENU", x + 420, y + 30);
-    if (mousePressed){
+    if (mousePressed && !keyPressed && !b && !d){
       if(mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h){
         d = true;
         b = false;
@@ -120,37 +120,45 @@ void draw() {
     }
   }
   if (d){
-    s.clear(); 
+    b = false;
+    c = false;
+    fill(255);
+    rect(x, y, w, h);
+    fill(140, 226, 191);
+    rect(x + 200, y, w, h);
+    fill(255);
+    rect(x + 400, y, w, h);
+    fill(0);
+    text("CLEAR SYSTEM", x + 20, y + 30);
+    text("RUN THE SYSTEM!", x + 210, y + 30);
+    text("BACK TO MENU", x + 420, y + 30);
     //user input stuff
     if(s.size() == 0){
       fill(255);
-      text("Click to place central planet!", 150, 100);
+      text("shift + click to place bodies!", 150, 100);
     }
-    else{
-      if(s.size() == 1){
-        fill(255, 255, 255);
-        text("Click to add orbiting bodies!", 150, 100);
+    if (mousePressed && !keyPressed && !b && !c){
+      if(mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h){
+        s.clear();
       }
-      fill(204, 45, 0);
-      ellipse(s.getBody(0).getX(), s.getBody(0).getY(), 100, 100);
-    }
-    if(mousePressed){
-      b = false;
-      c = false;
-      if(s.size() == 0){
-        Body center = new Body(1000, mouseX, mouseY, 0, 0);
-        s.addBody(center);
+      if(mouseX > x + 200 && mouseX < x + w + 200 && mouseY > y && mouseY < y + h){
+        s.show();
+        s.run();
+        //println("wow");
       }
-      else{
-        // random values, set defaults later
-        Body bod = new Body(40, mouseX, mouseY, 10, 10);
-        s.addBody(bod);
-        //println(a.size());
+      if(mouseX > x + 400 && mouseX < x + w + 400 && mouseY > y && mouseY < y + h){
+        s.clear();
+        b = false;
+        c = false;
+        d = false;
       }
     }
-    for(int i = 1; i < s.size(); i++){
-      s.getBody(i).display();
+    //shift 16, ctrl 17
+    if(mousePressed && keyPressed && keyCode == 16){
+      Body bod = new Body(40, mouseX, mouseY, 10, 0);
+      s.addBody(bod);
     }
+    s.show();
   }
 }
 
@@ -285,6 +293,7 @@ public class SYSTEM{
   //basic getter
   public Body getBody(int index){
     if (bodies.size() == 0){return null;}
+    if (index >= bodies.size()){return null;}
     return bodies.get(index);
   }
 
