@@ -8,10 +8,12 @@ Alternatively, the user has the option of choosing a system from a menu of sever
 
 <b>Features</b>
 
+Our orbit simulator has several important features, namely:
+
 <ol>
-  <li>pre-set scenarios</li>
-  <li>draw your own</li>
-  <li>user-inputted mass and velocity</li>
+  <li>Pre-set scenarios</li>
+  <li>User-created bodies</li>
+  <li>User-inputted mass and initial velocity</li>
   <li>trace?</li>
 </ol>
 
@@ -21,4 +23,4 @@ To run this simulation, change the directory to OrbitSimulator and enter:
 
 <i>processing OrbitSimulator.pde</i>
 
-into your terminal.
+into your terminal. Then follow the directions in the start menu.
