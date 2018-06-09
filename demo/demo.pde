@@ -6,6 +6,7 @@ SYSTEM s = new SYSTEM();
 PImage bg;
 boolean b = false;
 boolean c = false;
+boolean d = false;
 
 void setup(){
  size(600, 600);
@@ -21,7 +22,7 @@ void setup(){
 
 void draw() {
   background(bg);
-  if (!b && !c){
+  if (!b && !c && !d){
   fill(255);
   rect(225, 300, w, h);
   rect(225, 400, w, h);
@@ -37,10 +38,12 @@ void draw() {
     if (mouseX > 225 && mouseX < 225 + w && mouseY > 300 && mouseY < 300 + h){
       b = true;
       c = false;
+      d = false;
     }
     if (mouseX > 225 && mouseX < 225 + w && mouseY > 400 && mouseY < 400 + h){
       c = true;
       b = false;
+      d = false;
     }
   }
   if (b){
@@ -71,6 +74,7 @@ void draw() {
         s.clear();
         b = false;
         c = false;
+        d = false;
       }
     }
     textSize(15);
@@ -87,23 +91,65 @@ void draw() {
   }
   if (c){
     s.clear();
+    fill(255);
+    rect(x, y, w, h);
     fill(140, 226, 191);
     rect(x + 200, y, w, h);
     fill(255);
     rect(x + 400, y, w, h);
     fill(0);
+    text("DRAW BODIES", x + 25, y + 30);
     text("RUN THE SYSTEM!", x + 210, y + 30);
     text("BACK TO MENU", x + 420, y + 30);
     if (mousePressed){
+      if(mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h){
+        d = true;
+        b = false;
+        c = false;
+      }
       if(mouseX > x + 200 && mouseX < x + w + 200 && mouseY > y && mouseY < y + h){
-        s.clear(); 
-        //user input stuff
+        s.show();
+        s.run();
       }
       if(mouseX > x + 400 && mouseX < x + w + 400 && mouseY > y && mouseY < y + h){
         s.clear();
         b = false;
         c = false;
+        d = false;
       }
+    }
+  }
+  if (d){
+    s.clear(); 
+    //user input stuff
+    if(s.size() == 0){
+      fill(255);
+      text("Click to place central planet!", 150, 100);
+    }
+    else{
+      if(s.size() == 1){
+        fill(255, 255, 255);
+        text("Click to add orbiting bodies!", 150, 100);
+      }
+      fill(204, 45, 0);
+      ellipse(s.getBody(0).getX(), s.getBody(0).getY(), 100, 100);
+    }
+    if(mousePressed){
+      b = false;
+      c = false;
+      if(s.size() == 0){
+        Body center = new Body(1000, mouseX, mouseY, 0, 0);
+        s.addBody(center);
+      }
+      else{
+        // random values, set defaults later
+        Body bod = new Body(40, mouseX, mouseY, 10, 10);
+        s.addBody(bod);
+        //println(a.size());
+      }
+    }
+    for(int i = 1; i < s.size(); i++){
+      s.getBody(i).display();
     }
   }
 }
