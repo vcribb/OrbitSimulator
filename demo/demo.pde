@@ -1,12 +1,20 @@
+//dimensions for buttons
 float x = 25;
 float y = 530;
 float w = 150;
 float h = 40;
+
+//main SYSTEM
 SYSTEM s = new SYSTEM();
+
+//background image
 PImage bg;
+
+//useful for menus
 boolean b = false;
 boolean c = false;
 boolean d = false;
+boolean e = false;
 
 void setup(){
  size(600, 600);
@@ -22,7 +30,7 @@ void setup(){
 
 void draw() {
   background(bg);
-  if (!b && !c && !d){
+  if (!b && !c && !d && !e){
   fill(255);
   rect(225, 300, w, h);
   rect(225, 400, w, h);
@@ -39,11 +47,13 @@ void draw() {
       b = true;
       c = false;
       d = false;
+      e = false;
     }
     if (mouseX > 225 && mouseX < 225 + w && mouseY > 400 && mouseY < 400 + h){
       c = true;
       b = false;
       d = false;
+      e = false;
     }
   }
   if (b){
@@ -75,6 +85,7 @@ void draw() {
         b = false;
         c = false;
         d = false;
+        e = false;
       }
     }
     textSize(15);
@@ -106,16 +117,17 @@ void draw() {
         d = true;
         b = false;
         c = false;
+        e = false;
       }
       if(mouseX > x + 200 && mouseX < x + w + 200 && mouseY > y && mouseY < y + h){
-        s.show();
-        s.run();
+        e = true;
       }
       if(mouseX > x + 400 && mouseX < x + w + 400 && mouseY > y && mouseY < y + h){
         s.clear();
         b = false;
         c = false;
         d = false;
+        e = false;
       }
     }
   }
@@ -129,36 +141,47 @@ void draw() {
     fill(255);
     rect(x + 400, y, w, h);
     fill(0);
+    textSize(15);
     text("CLEAR SYSTEM", x + 20, y + 30);
     text("RUN THE SYSTEM!", x + 210, y + 30);
     text("BACK TO MENU", x + 420, y + 30);
     //user input stuff
     if(s.size() == 0){
       fill(255);
-      text("shift + click to place bodies!", 150, 100);
+      textSize(20);
+      text("shift + click to place bodies!", 175, 100);
     }
     if (mousePressed && !keyPressed && !b && !c){
       if(mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h){
         s.clear();
+        e = false;
       }
       if(mouseX > x + 200 && mouseX < x + w + 200 && mouseY > y && mouseY < y + h){
-        s.show();
-        s.run();
-        //println("wow");
+        e = true;
       }
       if(mouseX > x + 400 && mouseX < x + w + 400 && mouseY > y && mouseY < y + h){
         s.clear();
         b = false;
         c = false;
         d = false;
+        e = false;
       }
     }
     //shift 16, ctrl 17
     if(mousePressed && keyPressed && keyCode == 16){
-      Body bod = new Body(40, mouseX, mouseY, 10, 0);
-      s.addBody(bod);
+      if(s.size() == 0){
+        Body center = new Body(Math.pow(10, 27), mouseX, mouseY, 0, 0);
+        s.addBody(center);
+      }
+      else if (mouseX != s.getBody(0).getX() && mouseY != s.getBody(0).getY()){
+        Body bod = new Body(Math.pow(10, 21), mouseX, mouseY, 1, 0);
+        s.addBody(bod);
+      }
     }
     s.show();
+  }
+  if(e){
+    s.run();
   }
 }
 
