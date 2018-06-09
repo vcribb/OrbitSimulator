@@ -14,13 +14,13 @@ Our orbit simulator has several important features, namely:
   <li>Pre-set scenarios</li>
   <ul>
     <li>
-      If the user doesn't want to set up their own system, they can choose from a series of pre-set situations, such as a basic planet-sun system or a binary star system. The user would be able to select if they wanted to create their own system or run a pre-set one upon first running the program. These pre-set situations  illustrate particularly interesting or fundamental systems. They  also include monitors that display the x- and y-velocities of each of the bodies in the system at any given time.
+      If the user doesn't want to set up their own system, they can choose from a series of pre-set situations, such as a basic planet-sun system or a binary star system. The user would be able to select if they wanted to create their own system or run a pre-set one upon first running the program. These pre-set situations  illustrate particularly interesting or fundamental systems. They  also include monitors that display the x- and y-velocities of each body in the system.
     </li>
   </ul>
   <li>User-created scenarios</li>
   <ul>
     <li>
-      Alternatively, the user can create their own system by placing bodies on the screen with their mouse. They are also  able to determine the mass and initial velocity of each of the bodies in the system through keyboard input. The user can then run the simulation on their generated system.
+      Alternatively, the user can create their own system by placing bodies on the screen with their mouse (and clearing the screen if necessary). They are also able to determine the mass and initial velocity of each of the bodies in the system through keyboard input. The user can then run the simulation on their generated system.
     </li>
   </ul>
   <li>trace?</li>
