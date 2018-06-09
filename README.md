@@ -12,6 +12,9 @@ Our orbit simulator has several important features, namely:
 
 <ol>
   <li>Pre-set scenarios</li>
+  <ul>
+    <li>If the user doesn't want to set up their own system, they can choose from a series of pre-set situations, such as a basic planet-sun system or a binary star system.  The user would be able to select if they wanted to create their own system or run a pre-set one upon first running the program.  These pre-set situations would illustrate particularly interesting or fundamental systems.</li>
+  </ul>
   <li>User-created bodies</li>
   <li>User-inputted mass and initial velocity</li>
   <li>trace?</li>
