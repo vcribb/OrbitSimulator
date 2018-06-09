@@ -109,6 +109,7 @@ void draw() {
     fill(255);
     rect(x + 400, y, w, h);
     fill(0);
+    textSize(15);
     text("DRAW BODIES", x + 25, y + 30);
     text("RUN THE SYSTEM!", x + 210, y + 30);
     text("BACK TO MENU", x + 420, y + 30);
