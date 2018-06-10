@@ -1,3 +1,7 @@
+import controlP5.*;
+
+ControlP5 cp5;
+
 //dimensions for buttons
 float x = 25;
 float y = 530;
@@ -15,6 +19,15 @@ boolean b = false;
 boolean c = false;
 boolean d = false;
 boolean e = false;
+boolean f = false;
+
+boolean useful;
+
+// textfield inputs
+String m, _x, _y;
+
+float mX;
+float mY;
 
 void setup(){
  size(600, 600);
@@ -26,21 +39,22 @@ void setup(){
  else{
    bg = loadImage("nebula.jpg");
  }
+ cp5 = new ControlP5(this);
 }
 
 void draw() {
   background(bg);
-  if (!b && !c && !d && !e){
-  fill(255);
-  rect(225, 300, w, h);
-  rect(225, 400, w, h);
-  fill(255);
-  textSize(50);
-  text("ORBIT SIMULATOR", 75, 230);
-  textSize(15);
-  fill(0);
-  text("PRE-SET SYSTEMS", 235, 328);
-  text("DRAW YOUR OWN", 235, 428);
+  if (!b && !c && !d && !e && !f){
+    fill(255);
+    rect(225, 300, w, h);
+    rect(225, 400, w, h);
+    fill(255);
+    textSize(50);
+    text("ORBIT SIMULATOR", 75, 230);
+    textSize(15);
+    fill(0);
+    text("PRE-SET SYSTEMS", 235, 328);
+    text("DRAW YOUR OWN", 235, 428);
   }
   if (mousePressed && !keyPressed){
     if (mouseX > 225 && mouseX < 225 + w && mouseY > 300 && mouseY < 300 + h){
@@ -48,12 +62,14 @@ void draw() {
       c = false;
       d = false;
       e = false;
+      f = false;
     }
     if (mouseX > 225 && mouseX < 225 + w && mouseY > 400 && mouseY < 400 + h){
       c = true;
       b = false;
       d = false;
       e = false;
+      f = false;
     }
   }
   if (b){
@@ -86,6 +102,7 @@ void draw() {
         c = false;
         d = false;
         e = false;
+        f = false;
       }
     }
     textSize(15);
@@ -119,12 +136,13 @@ void draw() {
         b = false;
         c = false;
         e = false;
+        f = true;
       }
       if(mouseX > x + 200 && mouseX < x + w + 200 && mouseY > y && mouseY < y + h){
         e = true;
         b = false;
-        c = false;
         d = false;
+        f = false;
       }
       if(mouseX > x + 400 && mouseX < x + w + 400 && mouseY > y && mouseY < y + h){
         s.clear();
@@ -132,6 +150,7 @@ void draw() {
         c = false;
         d = false;
         e = false;
+        f = false;
       }
     }
   }
@@ -159,30 +178,45 @@ void draw() {
       if(mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h){
         s.clear();
         e = false;
+        f = true;
       }
       if(mouseX > x + 200 && mouseX < x + w + 200 && mouseY > y && mouseY < y + h){
         e = true;
         b = false;
         c = false;
+        f = false;
       }
       if(mouseX > x + 400 && mouseX < x + w + 400 && mouseY > y && mouseY < y + h){
         s.clear();
+        cp5.remove("mass");
+        cp5.remove("x vel");
+        cp5.remove("y vel");
+        cp5.remove("Submit");
         b = false;
         c = false;
         d = false;
         e = false;
+        f = false;
       }
     }
     //shift 16, ctrl 17
-    if(mousePressed && keyPressed && keyCode == 16){
-      if(s.size() == 0){
-        Body center = new Body(Math.pow(10, 27), mouseX, mouseY, 0, 0);
+    if(mousePressed && keyPressed && keyCode == 16 && f){
+      mX = mouseX;
+      mY = mouseY;
+      cp5.addTextfield("mass").setPosition(440, 30).setSize(140, 30);
+      cp5.addTextfield("x vel").setPosition(440, 80).setSize(140, 30);
+      cp5.addTextfield("y vel").setPosition(440, 130).setSize(140, 30);
+      cp5.addBang("Submit").setPosition(440, 200).setSize(80, 30);
+      /*if(s.size() == 0){
+        Body center = new Body(Math.pow(10, 27), mX, mY, 0, 0);
         s.addBody(center);
       }
       else if (mouseX != s.getBody(0).getX() && mouseY != s.getBody(0).getY()){
         Body bod = new Body(Math.pow(10, 21), mouseX, mouseY, 1, 0);
         s.addBody(bod);
       }
+      */
+      s.show();
     }
     s.show();
   }
@@ -190,6 +224,34 @@ void draw() {
     s.run();
   }
 }
+
+void Submit() {
+  if(cp5.get(Textfield.class,"y vel").getText().trim().length() > 0 && cp5.get(Textfield.class,"x vel").getText().trim().length() > 0 &&
+  cp5.get(Textfield.class,"mass").getText().trim().length() > 0){
+    m = cp5.get(Textfield.class,"mass").getText();
+    _x = cp5.get(Textfield.class,"x vel").getText();
+    _y = cp5.get(Textfield.class,"y vel").getText();
+  
+    // add new Body(m, someX, someY, _x, _y);
+    // then clear m, _x, _y
+    Body b = new Body(Double.parseDouble(m), mX, mY, Float.parseFloat(_x), Float.parseFloat(_y));
+    s.addBody(b);
+    m = "";
+    _x = "";
+    _y = "";
+ 
+    // clear after submitting
+    cp5.remove("mass");
+    cp5.remove("x vel");
+    cp5.remove("y vel");
+    cp5.remove("Submit");
+  }
+  else{
+    println("Enter all fields and select a location before submitting.");
+  }
+}
+
+//JAVA CLASSES********************************************************************************************************************
 
 import java.util.*;
 
