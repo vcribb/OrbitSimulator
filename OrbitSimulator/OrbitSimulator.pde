@@ -22,7 +22,7 @@ void setup(){
   // needs to be the same size
   // bg = loadImage("nebula2.jpg");
  
-  // input fields for mass, x vel, y vel, also a submit button
+  // input fields for mass, x vel, y vel, also submit and clear buttons
   cp5 = new ControlP5(this);
   cp5.addTextfield("mass").setPosition(800, 30).setSize(140, 35);
   cp5.addTextfield("x vel").setPosition(800, 100).setSize(140, 35);
@@ -30,12 +30,6 @@ void setup(){
   cp5.addBang("Submit").setPosition(800, 300).setSize(80, 35);
   cp5.addBang("Clear").setPosition(800, 500).setSize(35, 35);
   
-  // starting body, sun
- s.addBody(new Body(Math.pow(10, 27), 350, 300, 0, 0));
- 
- //creates two stars of equal mass
- //s.addBody(new Body(Math.pow(10, 27), 350, 300, 0, 0.85));
- //s.addBody(new Body(Math.pow(10, 27), 250, 300, 0, -0.85));
 }
 
 void draw(){
