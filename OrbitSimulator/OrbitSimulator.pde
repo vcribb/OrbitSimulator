@@ -1,111 +1,169 @@
 import java.util.*;
 import java.lang.*;
+import controlP5.*;
 
-System a;
+ControlP5 cp5;
+SYSTEM s = new SYSTEM();
+// textfield inputs
+String m, _x, _y;
+// mouse positions
+float xPos, yPos;
+// background image
+PImage bg;
+
+boolean displayMouse;
 
 void setup(){
-  size(500, 500);
-  a = new System();
+  size(1000, 600);
+  smooth();
+  background(0);
+  displayMouse = false;
+  
+  // needs to be the same size
+  // bg = loadImage("nebula2.jpg");
+ 
+  // input fields for mass, x vel, y vel, also submit and clear buttons
+  cp5 = new ControlP5(this);
+  cp5.addTextfield("mass").setPosition(800, 30).setSize(140, 35);
+  cp5.addTextfield("x vel").setPosition(800, 100).setSize(140, 35);
+  cp5.addTextfield("y vel").setPosition(800, 170).setSize(140, 35);
+  cp5.addBang("Submit").setPosition(800, 300).setSize(80, 35);
+  cp5.addBang("Clear").setPosition(800, 500).setSize(35, 35);
+  
 }
 
 void draw(){
-  background(50);
-  if(a.size() == 0){
-    text("Click to place central planet!", 150, 100);
+  background(0);
+  textSize(15);
+  fill(255, 255, 255);
+  text("Click to select location, \nthen hit SUBMIT!", 800, 250);
+  fieldsFilled();
+  if(displayMouse){
+   text("X", mouseX, mouseY); 
   }
-  else{
-    if(a.size() == 1){
-      fill(255, 255, 255);
-      text("Click to add orbiting bodies!", 150, 100);
-    }
-    fill(204, 45, 0);
-    ellipse(a.getBody(0).getX(), a.getBody(0).getY(), 100, 100);
-  }
-  for(int i = 1; i < a.size(); i++){
-    a.getBody(i).display();
-  }
+  s.show();
+  s.run();
 }
 
-void mousePressed(){
-   if(a.size() == 0){
-    Body center = new Body(1000, mouseX, mouseY, 0, 0);
-    a.addBody(center);
-  }
-  else{
-    // random values, set defaults later
-    Body bod = new Body(40, mouseX, mouseY, 10, 10);
-    a.addBody(bod);
-//    println(a.size());
-  }
-}
-
-public class System{
-
-    private ArrayList<Body> bodies;
-
-    public System(){
-  bodies = new ArrayList<Body>();
-    }
-
-    //basic getter
-
-    public Body getBody(int index){
-  return bodies.get(index);
-    }
-    
-    public int size(){
-      return bodies.size();
-    }
-
-    //basic setter
-
-    public void addBody(Body thing){
-  bodies.add(thing);
-    }
-
-    //main function!
-    public void run(){
-  //write this later
-  for (int x = 0; x < bodies.size(); x++){
-      for (int y = 0; y < bodies.size(); y++){
-    getBody(x).orbit(getBody(y));
+void fieldsFilled(){
+  if(cp5.get(Textfield.class,"y vel").getText().trim().length() > 0){
+    if(cp5.get(Textfield.class,"x vel").getText().trim().length() > 0){
+      if(cp5.get(Textfield.class,"mass").getText().trim().length() > 0){
+        displayMouse = true; 
       }
-  }
     }
+  }
+  else{
+    displayMouse = false;
+  }
+}
+
+void Submit() {
+  if(displayMouse){
+  m = cp5.get(Textfield.class,"mass").getText();
+  _x = cp5.get(Textfield.class,"x vel").getText();
+  _y = cp5.get(Textfield.class,"y vel").getText();
+  
+  // add new Body(m, someX, someY, _x, _y);
+  // then clear m, _x, _y
+ Body b = new Body(Double.parseDouble(m), xPos, yPos, Float.parseFloat(_x), Float.parseFloat(_y));
+ s.addBody(b);
+ m = "";
+ _x = "";
+ _y = "";
+ 
+ // clear after submitting
+  cp5.get(Textfield.class,"mass").clear();
+  cp5.get(Textfield.class,"x vel").clear();
+  cp5.get(Textfield.class,"y vel").clear();
+  }
+  else{
+    println("Enter all fields and select a location before submitting.");
+  }
+}
+
+void Clear(){
+  s.clear();
+}
+
+void mousePressed(){  
+  xPos = mouseX;
+  yPos = mouseY;
+}
+
+public class SYSTEM{
+
+  private ArrayList<Body> bodies;
+
+  public SYSTEM(){
+    bodies = new ArrayList<Body>();
+  }
+
+  public int size(){
+    return bodies.size();
+  }
+  
+  public void clear(){
+   bodies.clear(); 
+  }
+  
+  //basic getter
+  public Body getBody(int index){
+    return bodies.get(index);
+  }
+
+  //basic setter
+  public void addBody(Body thing){
+    bodies.add(thing);
+  }
+  
+  //main function! this calls the orbit function on each pair of bodies in the SYSTEM.
+  public void run(){
+    for (int x = 0; x < bodies.size(); x++){
+      for (int y = 0; y < bodies.size(); y++){
+        if (x != y){
+          getBody(x).orbit(getBody(y));
+        }
+      }
+    }
+  }
+  
+  //calls the display function on each body in the SYSTEM to "draw" it
+  void show(){
+    for (int x = 0; x < bodies.size(); x++){
+      getBody(x).display();
+    }
+  }
     
 }
 
 public class Body{
 
-    private int mass;
-    private double xvelocity;
-    private double yvelocity;
-    private double xacc;
-    private double yacc;
+    private double mass;
+    private float xvelocity;
+    private float yvelocity;
     private float x;
     private float y;
+    float r, g, b;
 
-    public Body(int m, float xpos, float ypos, double xvel, double yvel){
+    public Body(double m, float xpos, float ypos, float xvel, float yvel){
   mass = m;
   x = xpos;
   y = ypos;
   xvelocity = xvel;
   yvelocity = yvel;
+  r = random(255);
+  b = random(255);
+  g = random(255);
     }
 
     //a bunch of getters
 
-    public double getXVel(){
+    public float getXVel(){
   return xvelocity;
     }
-    public double getYVel(){
+    public float getYVel(){
   return yvelocity;
-    }
-    public double getXAcc(){
-  return xacc;
-    }
-    public double getYAcc(){
-  return yacc;
     }
     public float getX(){
   return x;
@@ -113,23 +171,17 @@ public class Body{
     public float getY(){
   return y;
     }
-    public int getMass(){
+    public double getMass(){
   return mass;
     }
 
     //a bunch of setters
 
-    public void setXVel(double newXVel){
+    public void setXVel(float newXVel){
   xvelocity = newXVel;
     }
-    public void setYVel(double newYVel){
+    public void setYVel(float newYVel){
   yvelocity = newYVel;
-    }
-    public void setXAcc(double newXAcc){
-  xacc = newXAcc;
-    }
-    public void setYAcc(double newYAcc){
-  yacc = newYAcc;
     }
     public void setX(float newX){
   x = newX;
@@ -137,22 +189,69 @@ public class Body{
     public void setY(float newY){
   y = newY;
     }
-    public void setMass(int newMass){
+    public void setMass(double newMass){
   mass = newMass;
     }
 
     //main function!
     public void orbit(Body other){
-  //write this later
-  y += yvelocity;
-  x += xvelocity;
-  xvelocity += xacc;
-  yvelocity += yacc;
+      force(other);
+      move();
     }
-    
-    // set sizes for now
-  void display(){
-    fill(0, 145, 104);
-    ellipse(x, y, 20.0, 20.0);
+   
+    //private helpers
+  private double dist(Body other){
+    return Math.sqrt(Math.pow(getX() - other.getX(), 2) +
+       Math.pow(getY() - other.getY(), 2));
   }
+
+  //finds the magnitude of acceleration due to the force exerted by a body
+  private double forceAcc(Body other){
+    //scale factor of 100 comes in here
+    return (6.67 * Math.pow(10, -24)) * other.getMass() /
+      (Math.pow(dist(other), 2));
+  }
+
+  //finds the angle between the two bodies
+  private double theta(Body other){
+    return Math.atan(Math.abs(getX() - other.getX())/
+       Math.abs(getY() - other.getY()));
+  }
+
+  private void force(Body other){
+    //accounting for time errors
+    //calculates the values of the gravitational force many times per frame and adds them
+    float counter = 0.0;
+    float simtime = 0.001;
+    counter += (1 / frameRate);
+    while (counter > 0.0){
+      if (getX() > other.getX()){
+        xvelocity -= forceAcc(other) * Math.sin(theta(other)) * simtime;
+      }
+      else{
+        xvelocity += forceAcc(other) * Math.sin(theta(other)) * simtime;
+      }
+      if (getY() > other.getY()){
+        yvelocity -= forceAcc(other) * Math.cos(theta(other)) * simtime;
+      }
+      else{
+        yvelocity += forceAcc(other) * Math.cos(theta(other)) * simtime;
+      }
+      counter -= simtime;
+    }
+  }
+
+  //applies the effects of the gravitational force
+  void move(){
+    setX(getX() + xvelocity);
+    setY(getY() + yvelocity);
+  }
+  
+  //draws the individual bodies
+  void display() {
+    stroke(0);
+    fill(r, g, b);
+    ellipse(getX(), getY(), 50, 50);
+  }
+    
 }
