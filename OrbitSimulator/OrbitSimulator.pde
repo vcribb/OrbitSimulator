@@ -17,6 +17,7 @@ void setup(){
   size(1000, 600);
   smooth();
   background(0);
+  // needs to be the same size
 //  bg = loadImage("nebula2.jpg");
   // input fields for mass, x vel, y vel, also a submit button
   cp5 = new ControlP5(this);
@@ -38,23 +39,32 @@ void draw(){
   background(0);
   textSize(15);
   fill(255, 255, 255);
-  text("After entering ALL fields, \nclick to choose location, \nthen click SUBMIT!", 800, 240);
-  //if(displayMouse){
+  text("Click to choose location, \nthen click SUBMIT!", 800, 240);
+  fieldsFilled();
+  if(displayMouse){
    text("X", mouseX, mouseY); 
-//  }
+   }
   s.show();
   s.run();
+}
+
+void fieldsFilled(){
+  if(cp5.get(Textfield.class,"y vel").getText().trim().length() > 0){
+    if(cp5.get(Textfield.class,"x vel").getText().trim().length() > 0){
+      if(cp5.get(Textfield.class,"mass").getText().trim().length() > 0){
+        displayMouse = true; 
+      }
+    }
+  }
+  else{
+    displayMouse = false;
+  }
 }
 
 void Submit() {
   m = cp5.get(Textfield.class,"mass").getText();
   _x = cp5.get(Textfield.class,"x vel").getText();
   _y = cp5.get(Textfield.class,"y vel").getText();
-  
-  // clear after submitting
-  cp5.get(Textfield.class,"mass").clear();
-  cp5.get(Textfield.class,"x vel").clear();
-  cp5.get(Textfield.class,"y vel").clear();
   
   // add new Body(m, someX, someY, _x, _y);
   // then clear m, _x, _y again
@@ -63,7 +73,11 @@ void Submit() {
  m = "";
  _x = "";
  _y = "";
- displayMouse = false;
+ 
+ // clear after submitting
+  cp5.get(Textfield.class,"mass").clear();
+  cp5.get(Textfield.class,"x vel").clear();
+  cp5.get(Textfield.class,"y vel").clear();
 }
 
 void Clear(){
@@ -72,7 +86,7 @@ void Clear(){
 
 void mousePressed(){  
   xPos = mouseX;
-  yPos = mouseY; 
+  yPos = mouseY;
 }
 
 public class SYSTEM{
@@ -233,7 +247,7 @@ public class Body{
   
   //draws the individual bodies
   void display() {
-    stroke(204, 102, 0);
+    stroke(0);
     fill(r, g, b);
     ellipse(getX(), getY(), 50, 50);
   }
