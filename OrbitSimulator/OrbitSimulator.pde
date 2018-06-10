@@ -17,8 +17,11 @@ void setup(){
   size(1000, 600);
   smooth();
   background(0);
+  displayMouse = false;
+  
   // needs to be the same size
-//  bg = loadImage("nebula2.jpg");
+  // bg = loadImage("nebula2.jpg");
+ 
   // input fields for mass, x vel, y vel, also a submit button
   cp5 = new ControlP5(this);
   cp5.addTextfield("mass").setPosition(800, 30).setSize(140, 35);
@@ -32,18 +35,18 @@ void setup(){
  
  //creates two stars of equal mass
  //s.addBody(new Body(Math.pow(10, 27), 350, 300, 0, 0.85));
-// s.addBody(new Body(Math.pow(10, 27), 250, 300, 0, -0.85));
+ //s.addBody(new Body(Math.pow(10, 27), 250, 300, 0, -0.85));
 }
 
 void draw(){
   background(0);
   textSize(15);
   fill(255, 255, 255);
-  text("Click to choose location, \nthen click SUBMIT!", 800, 240);
+  text("Click to select location, \nthen hit SUBMIT!", 800, 250);
   fieldsFilled();
   if(displayMouse){
    text("X", mouseX, mouseY); 
-   }
+  }
   s.show();
   s.run();
 }
@@ -62,12 +65,13 @@ void fieldsFilled(){
 }
 
 void Submit() {
+  if(displayMouse){
   m = cp5.get(Textfield.class,"mass").getText();
   _x = cp5.get(Textfield.class,"x vel").getText();
   _y = cp5.get(Textfield.class,"y vel").getText();
   
   // add new Body(m, someX, someY, _x, _y);
-  // then clear m, _x, _y again
+  // then clear m, _x, _y
  Body b = new Body(Double.parseDouble(m), xPos, yPos, Float.parseFloat(_x), Float.parseFloat(_y));
  s.addBody(b);
  m = "";
@@ -78,6 +82,10 @@ void Submit() {
   cp5.get(Textfield.class,"mass").clear();
   cp5.get(Textfield.class,"x vel").clear();
   cp5.get(Textfield.class,"y vel").clear();
+  }
+  else{
+    println("Enter all fields and select a location before submitting.");
+  }
 }
 
 void Clear(){
