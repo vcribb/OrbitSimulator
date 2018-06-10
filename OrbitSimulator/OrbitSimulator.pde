@@ -4,21 +4,26 @@ import controlP5.*;
 
 ControlP5 cp5;
 SYSTEM s = new SYSTEM();
+// textfield inputs
 String m, _x, _y;
+// mouse positions
 float xPos, yPos;
+// background image
+PImage bg;
+
+boolean displayMouse;
 
 void setup(){
   size(1000, 600);
   smooth();
   background(0);
+//  bg = loadImage("nebula2.jpg");
   // input fields for mass, x vel, y vel, also a submit button
   cp5 = new ControlP5(this);
   cp5.addTextfield("mass").setPosition(800, 30).setSize(140, 35);
   cp5.addTextfield("x vel").setPosition(800, 100).setSize(140, 35);
   cp5.addTextfield("y vel").setPosition(800, 170).setSize(140, 35);
   cp5.addBang("Submit").setPosition(800, 300).setSize(80, 35);
-  
-  // perhaps a clear button?
   cp5.addBang("Clear").setPosition(800, 500).setSize(35, 35);
   
   // starting body, sun
@@ -34,6 +39,9 @@ void draw(){
   textSize(15);
   fill(255, 255, 255);
   text("After entering ALL fields, \nclick to choose location, \nthen click SUBMIT!", 800, 240);
+  //if(displayMouse){
+   text("X", mouseX, mouseY); 
+//  }
   s.show();
   s.run();
 }
@@ -55,6 +63,7 @@ void Submit() {
  m = "";
  _x = "";
  _y = "";
+ displayMouse = false;
 }
 
 void Clear(){
