@@ -49,6 +49,7 @@ Place a body roughly half an inch below it. Enter the following values:
 </ul>
 This system should imitate the pre-set sun-planet system.
 </li>
+  
 <li>
 Alternatively, place two bodies at the center of the screen at a distance of roughly half an inch apart. Enter the following values for the first body:
 <ul>
