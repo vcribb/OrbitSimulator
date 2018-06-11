@@ -6,6 +6,8 @@ Our orbit simulator is a program that takes a system of bodies and simulates the
 
 Alternatively, the user has the option of choosing a system from a menu of several pre-set situations, such as a two-body planet-satellite system or a binary star system, to run the simulation on. The user is not able to alter the mass or initial velocities of any of the planets or satellites in any of these pre-set situations. These pre-set situations include monitors that display the x- and y-velocities of each of the bodies in the system at any given time.
 
+<u><i>Important note:</i></u> This orbit simulator translates a pixel to a hundred meters.
+
 <b>Features</b>
 
 Our orbit simulator has several important features, namely:
@@ -35,36 +37,11 @@ Our orbit simulator has several important features, namely:
 
 <ol>
   <li>
-Place a body at the center of the screen. Enter the following values:
-<ul>
-  <li>Mass: 1000000000000000000000000000 (10E27)</li>
-  <li>x-velocity: 0</li>
-  <li>y-velocity: 0</li>
-</ul>
-Place a body roughly half an inch below it. Enter the following values:
-<ul>
-  <li>Mass: 1000000000000000000000 (10E21)</li>
-  <li>x-velocity: 1</li>
-  <li>y-velocity: 0</li>
-</ul>
-This system should imitate the pre-set sun-planet system.
-</li>
-  
-<li>
-Alternatively, place two bodies at the center of the screen at a distance of roughly half an inch apart. Enter the following values for the first body:
-<ul>
-  <li>Mass: 1000000000000000000000000000 (10E27)</li>
-  <li>x-velocity: 0</li>
-  <li>y-velocity: -.85</li>
-</ul>
-Enter the following values for the second body:
-<ul>
-  <li>Mass: 1000000000000000000000000000 (10E27)</li>
-  <li>x-velocity: 0</li>
-  <li>y-velocity: .85</li>
-</ul>
-This system should imitate the pre-set binary star system.
-</li>
+Place a body at the center of the screen. Assign it a mass of 10E27, an x-velocity of 0, and a y-velocity of 0. Place a body roughly half an inch below it, and assign that body a mass of 10E21, an x-velocity of 1, and a y-velocity of 0. This system should imitate the pre-set sun-planet system.
+  </li>
+  <li>
+Alternatively, place two bodies at the center of the screen at a distance of roughly half an inch apart. Assign one body a mass of 10E27, an x-velocity of 0, and a y-velocity of -0.85. Assign the other body a mass of 10E27, an x-velocity of 0, and a y-velocity of 0.85. This system should imitate the pre-set binary star system.
+  </li>
 </ol>
 
 <b>Instructions</b>
