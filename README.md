@@ -31,6 +31,43 @@ Our orbit simulator has several important features, namely:
   </ul>
 </ol>
 
+<b>Suggestions for user-generated situations</b>
+
+<ol>
+  <li>
+Place a body at the center of the screen. Enter the following values:
+
+Mass: 1000000000000000000000000000 (10E27)
+x-velocity: 0
+y-velocity: 0
+
+Place a body roughly half an inch below it. Enter the following values:
+
+Mass: 1000000000000000000000 (10E21)
+x-velocity: 1
+y-velocity: 0
+
+This system should imitate the pre-set sun-planet system.
+</li>
+<li>
+Alternatively, place two bodies at the center of the screen at a distance of roughly half an inch apart.
+
+Enter the following values for the first body:
+
+Mass: 1000000000000000000000000000 (10E27)
+x-velocity: 0
+y-velocity: -.85
+
+Enter the following values for the second body:
+
+Mass: 1000000000000000000000000000 (10E27)
+x-velocity: 0
+y-velocity: .85
+
+This system should imitate the pre-set binary star system.
+</li>
+</ol>
+
 <b>Instructions</b>
 
 To run this simulation, the user must change the directory to OrbitSimulator and enter:
