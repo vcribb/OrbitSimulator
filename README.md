@@ -36,34 +36,32 @@ Our orbit simulator has several important features, namely:
 <ol>
   <li>
 Place a body at the center of the screen. Enter the following values:
-
-<p>Mass: 1000000000000000000000000000 (10E27)</p>
-<p>x-velocity: 0</p>
-<p>y-velocity: 0</p>
-
+<ul>
+  <li>Mass: 1000000000000000000000000000 (10E27)</li>
+  <li>x-velocity: 0</li>
+  <li>y-velocity: 0</li>
+</ul>
 Place a body roughly half an inch below it. Enter the following values:
-
-<p>Mass: 1000000000000000000000 (10E21)</p>
-<p>x-velocity: 1</p>
-<p>y-velocity: 0</p>
-
+<ul>
+  <li>Mass: 1000000000000000000000 (10E21)</li>
+  <li>x-velocity: 1</li>
+  <li>y-velocity: 0</li>
+</ul>
 This system should imitate the pre-set sun-planet system.
 </li>
 <li>
-Alternatively, place two bodies at the center of the screen at a distance of roughly half an inch apart.
-
-Enter the following values for the first body:
-
-<p>Mass: 1000000000000000000000000000 (10E27)</p>
-<p>x-velocity: 0</p>
-<p>y-velocity: -.85</p>
-
+Alternatively, place two bodies at the center of the screen at a distance of roughly half an inch apart. Enter the following values for the first body:
+<ul>
+  <li>Mass: 1000000000000000000000000000 (10E27)</li>
+  <li>x-velocity: 0</li>
+  <li>y-velocity: -.85</li>
+</ul>
 Enter the following values for the second body:
-
-<p>Mass: 1000000000000000000000000000 (10E27)</p>
-<p>x-velocity: 0</p>
-<p>y-velocity: .85</p>
-
+<ul>
+  <li>Mass: 1000000000000000000000000000 (10E27)</li>
+  <li>x-velocity: 0</li>
+  <li>y-velocity: .85</li>
+</ul>
 This system should imitate the pre-set binary star system.
 </li>
 </ol>
